@@ -145,6 +145,17 @@ function Tree(arr) {
         }
         return null;
     }
+
+    function height(value) {
+        const node = findNode(value);
+        if (node === undefined) return undefined;
+        return heightOfNode(node);
+
+        function heightOfNode(node) {
+            if (node === undefined) return -1;
+            return 1 + Math.max(heightOfNode(node.left), heightOfNode(node.right));
+        }
+    }
     
 
     return { root, includes, insert }
