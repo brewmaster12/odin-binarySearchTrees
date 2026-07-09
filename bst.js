@@ -42,7 +42,7 @@ function Tree(arr) {
 
     function insert(value) {
         function insertNode(node, value) {
-            if (node === null) return Node(value);
+            if (node === undefined) return Node(value);
             if (value === node.data) return node;
             if (value < node.data) {
                 node.left = insertNode(node.left, value);
@@ -81,6 +81,21 @@ function Tree(arr) {
         }
 
         root = deleteNode(root, value);
+    }
+
+    function levelOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("A callback function is required");
+        }
+        if (root === null) return;
+
+        const queue = [root];
+        while (queue.length > 0) {
+            const node = queue.shift();
+            callback(node.data);
+            if (node.left !== null) queue.push(node.left);
+            if (node.right !== null) queue.push(node.right);
+        }
     }
 
     return { root, includes, insert }
