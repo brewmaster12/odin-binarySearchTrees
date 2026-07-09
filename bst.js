@@ -6,6 +6,9 @@ function Tree(arr) {
     // Sort and remove duplicates
     arr = [...new Set(arr)].sort((a, b) => a - b);
 
+    const root = buildTree(arr);
+
+    // Private method
     function buildTree(arr) {
         // Base case
         if (arr.length === 1) return Node(arr[0]);
@@ -28,8 +31,17 @@ function Tree(arr) {
         return tree;
     }
 
-    const root = buildTree(arr);
-    return { root }
+    function includes(value) {
+        let node = root;
+        while (node !== undefined) {
+            if (node.data === value) return true;
+            else if (value < node.data) node = node.left;
+            else node = node.right;
+        }
+        return false;
+    }
+
+    return { root, includes }
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -42,6 +54,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 }
 
-// const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const testArr = [16, 456, 6254, 6542, 78, 74, 22, 565, 1, 1, 1, 4, 5, 6, 7, 89, 9, 4];
 // const testTree = Tree(testArr);
 // prettyPrint(testTree.root);
