@@ -35,15 +35,20 @@ function Tree(arr) {
         let node = root;
         while (node !== undefined) {
             if (node.data === value) return true;
-            else if (value < node.data) node = node.left;
-            else node = node.right;
+            node = value < node.data ? node.left : node.right;
         }
         return false;
     }
 
-    return { root, includes }
+    function insert(value) {
+        const newNode = Node(value);
+    }
+
+    return { root, includes, insert }
 }
 
+
+// Taken from assignment notes
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null || node === undefined) {
     return;
