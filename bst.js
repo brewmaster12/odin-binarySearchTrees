@@ -167,6 +167,23 @@ function Tree(arr) {
         }
         return undefined;
     }
+
+    function isBalanced() {
+        function checkHeight(node) {
+            if (node === undefined) return -1;
+
+            const leftHeight = checkHeight(node.left);
+            if (leftHeight === -Infinity) return -Infinity;
+
+            const rightHeight = checkHeight(node.right);
+            if (rightHeight === -Infinity) return -Infinity;
+
+            if (Math.abs(leftHeight - rightHeight) > 1) return -Infinity;
+
+            return 1 + Math.max(leftHeight, rightHeight);
+        }
+        return checkHeight(root) !== -Infinity;
+    }
     
 
     return { root, includes, insert }
