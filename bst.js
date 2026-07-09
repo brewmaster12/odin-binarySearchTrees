@@ -156,6 +156,17 @@ function Tree(arr) {
             return 1 + Math.max(heightOfNode(node.left), heightOfNode(node.right));
         }
     }
+
+    function depth(value) {
+        let node = root;
+        let edges = 0;
+        while (node !== undefined) {
+            if (node.data === value) return edges;
+            node = value < node.data ? node.left : node.right;
+            edges++;
+        }
+        return undefined;
+    }
     
 
     return { root, includes, insert }
