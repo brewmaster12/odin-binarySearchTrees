@@ -184,6 +184,12 @@ function Tree(arr) {
         }
         return checkHeight(root) !== -Infinity;
     }
+
+    function rebalance() {
+        const values = [];
+        inOrderForEach((value) => values.push(value));
+        root = buildTree(values);
+    }
     
 
     return { root, includes, insert }
