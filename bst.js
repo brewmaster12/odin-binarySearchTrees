@@ -54,6 +54,35 @@ function Tree(arr) {
         root = insertNode(root, value);
     }
 
+    function deleteItem(value) {
+        function findMin(node) {
+            while (node.left !== undefined) node = node.left;
+            return node;
+        }
+
+        function deleteNode(node, value) {
+            if (node === undefined) return undefined;
+
+            if (value < node.data) {
+                node.left = deleteNode(node.left, value);
+            } else if (value > node.data) {
+                node.right = deleteNode(node.right, value);
+            } else {
+                // Found node to delete
+                if (node.left === undefined) return node.right;
+                if (node.right === undefined) return node.left;
+
+                // Replace children
+                const successor = findMin(node.right);
+                node.data = successor.data;
+                node.right = deleteNode(node.right, successor.data);
+            }
+            return node;
+        }
+
+        root = deleteNode(root, value);
+    }
+
     return { root, includes, insert }
 }
 
