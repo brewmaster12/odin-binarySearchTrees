@@ -1,5 +1,5 @@
-function Node(data, leftChild, rightChild) {
-    return { data, leftChild, rightChild }
+function Node(data, left, right) {
+    return { data, left, right }
 }
 
 function Tree(arr) {
@@ -31,3 +31,17 @@ function Tree(arr) {
     const root = buildTree(arr);
     return { root }
 }
+
+const prettyPrint = (node, prefix = '', isLeft = true) => {
+  if (node === null || node === undefined) {
+    return;
+  }
+
+  prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+  prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+}
+
+// const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const testTree = Tree(testArr);
+// prettyPrint(testTree.root);
