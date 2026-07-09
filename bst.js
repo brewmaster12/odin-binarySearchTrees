@@ -87,15 +87,28 @@ function Tree(arr) {
         if (typeof callback !== "function") {
             throw new Error("A callback function is required");
         }
-        if (root === null) return;
+        if (root === undefined) return;
 
         const queue = [root];
         while (queue.length > 0) {
             const node = queue.shift();
             callback(node.data);
-            if (node.left !== null) queue.push(node.left);
-            if (node.right !== null) queue.push(node.right);
+            if (node.left !== undefined) queue.push(node.left);
+            if (node.right !== undefined) queue.push(node.right);
         }
+    }
+
+    function inOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("A callbakc function is required");
+        }
+        function traverse(node) {
+            if (node === undefined) return;
+            traverse(node.left);
+            callback(node.data);
+            traverse(node.right);
+        }
+        traverse(root);
     }
 
     return { root, includes, insert }
