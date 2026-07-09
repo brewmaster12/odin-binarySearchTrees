@@ -6,7 +6,7 @@ function Tree(arr) {
     // Sort and remove duplicates
     arr = [...new Set(arr)].sort((a, b) => a - b);
 
-    const root = buildTree(arr);
+    let root = buildTree(arr);
 
     // Private method
     function buildTree(arr) {
@@ -100,7 +100,7 @@ function Tree(arr) {
 
     function inOrderForEach(callback) {
         if (typeof callback !== "function") {
-            throw new Error("A callbakc function is required");
+            throw new Error("A callback function is required");
         }
         function traverse(node) {
             if (node === undefined) return;
@@ -143,7 +143,7 @@ function Tree(arr) {
             if (node.data === value) return node;
             node = value < node.data ? node.left : node.right;
         }
-        return null;
+        return undefined;
     }
 
     function height(value) {
@@ -192,7 +192,20 @@ function Tree(arr) {
     }
     
 
-    return { root, includes, insert }
+    return { 
+        get root() {return root;},
+        includes,
+        insert,
+        deleteItem,
+        levelOrderForEach,
+        inOrderForEach,
+        preOrderForEach,
+        postOrderForEach,
+        height,
+        depth,
+        isBalanced,
+        rebalance,
+    }
 }
 
 
@@ -207,6 +220,4 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 }
 
-// const testArr = [16, 456, 6254, 6542, 78, 74, 22, 565, 1, 1, 1, 4, 5, 6, 7, 89, 9, 4];
-// const testTree = Tree(testArr);
-// prettyPrint(testTree.root);
+export { Tree, Node };
