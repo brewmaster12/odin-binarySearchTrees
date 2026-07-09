@@ -136,6 +136,15 @@ function Tree(arr) {
         }
         traverse(root);
     }
+
+    function findNode(value) {
+        let node = root;
+        while (node !== undefined) {
+            if (node.data === value) return node;
+            node = value < node.data ? node.left : node.right;
+        }
+        return null;
+    }
     
 
     return { root, includes, insert }
