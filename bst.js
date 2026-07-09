@@ -41,7 +41,17 @@ function Tree(arr) {
     }
 
     function insert(value) {
-        const newNode = Node(value);
+        function insertNode(node, value) {
+            if (node === null) return Node(value);
+            if (value === node.data) return node;
+            if (value < node.data) {
+                node.left = insertNode(node.left, value);
+            } else {
+                node.right = insertNode(node.right, value);
+            }
+            return node;
+        }
+        root = insertNode(root, value);
     }
 
     return { root, includes, insert }
