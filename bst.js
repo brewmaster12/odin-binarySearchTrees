@@ -124,6 +124,20 @@ function Tree(arr) {
         traverse(root);
     }
 
+    function postOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("A callbakc function is required");
+        }
+        function traverse(node) {
+            if (node === undefined) return;
+            traverse(node.left);
+            traverse(node.right);
+            callback(node.data);
+        }
+        traverse(root);
+    }
+    
+
     return { root, includes, insert }
 }
 
